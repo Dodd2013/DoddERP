@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>登录</title>
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="asset/plugin/bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="asset/css/signin.css">
+		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
+			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+		<div class="container" ng-app='DoddERP' ng-controller='loginCtrl'>
+
+		      <form class="form-signin">
+		        <h2 class="form-signin-heading">登录</h2>
+		        <label for="inputUserName" class="sr-only">用户名</label>
+		        <input type="text" name='userName' ng-model='user.userName' id="inputUserName" class="form-control" placeholder="用户名" required autofocus>
+		        <label for="inputPassword" class="sr-only">Password</label>
+		        <input type="password" ng-model='user.userPassword' id="inputPassword" name="userPWD" class="form-control" placeholder="密码" required>
+<!-- 		        <div class="checkbox">
+		          <label>
+		            <input type="checkbox" value="remember-me"> Remember me
+		          </label>
+		        </div> -->
+		        <button ng-click='login()' class="btn btn-lg btn-primary btn-block" type="button">登录</button>
+		      </form>
+
+		    </div> <!-- /container -->
+		<!-- jQuery -->
+		<script src="asset/plugin/jquery.min.js"></script>
+		<!-- Bootstrap JavaScript -->
+		<script src="asset/plugin/bootstrap/js/bootstrap.min.js"></script>
+		<!-- Angularjs-->
+		<script src="asset/plugin/angular.min.js"></script>
+		<script type="text/javascript">
+			var app = angular.module('DoddERP', []);
+			app.controller('loginCtrl', function($scope,$http) {
+				$scope.user={
+					userName:'',
+					userPassword:''
+				};
+			    $scope.login=function() {
+			    	$http.put('session',$scope.user)
+			    	.success(function(data) {
+			    		alert(JSON.stringify(data));
+			    	})
+			    	.error(function(data) {
+						alert(JSON.stringify(data));
+			    	});
+			    };
+			});
+		</script>
+	</body>
+</html>
