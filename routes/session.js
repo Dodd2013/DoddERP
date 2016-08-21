@@ -20,6 +20,6 @@ router.put('/',function(req, res) {
     });
 });
 router.delete('/',function(req, res) {
-	
+	req.session.userName = undefined;
 });
 module.exports = router;

@@ -1,1 +1,1 @@
-browser-sync start --server --port 80 --files "**/*.*,*.*"
+browser-sync start --proxy "127.0.0.1:3000" --port 80 --files "**/*.*,*.*"

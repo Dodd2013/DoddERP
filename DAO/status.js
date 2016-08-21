@@ -5,7 +5,7 @@ module.exports = {
     * */
     success: {
         status: 1,
-        message: 'OK'
+        msg: 'OK'
     },
     /*
     * 失败状态
@@ -13,13 +13,13 @@ module.exports = {
     * */
     fail: {
         status: 0,
-        message: 'FAIL'
+        msg: 'FAIL'
     },
     /*
     * 两次输入的密码不一致
     * */
     repeatPassword: {
         status: 0,
-        message: '两次输入的密码不一致'
+        msg: '两次输入的密码不一致'
     }
  };

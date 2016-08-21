@@ -13,7 +13,7 @@ var errorHandler=function(app) {
         res.status(err.status || 500);
         console.log(err);
         res.jsonp({
-          message: err.message,
+          msg: err.message,
           error: err
         });
       });
@@ -24,7 +24,7 @@ var errorHandler=function(app) {
     app.use(function(err, req, res, next) {
       res.status(err.status || 500);
       res.jsonp({
-        message: err.message,
+        msg: err.message,
         error: {}
       });
     });

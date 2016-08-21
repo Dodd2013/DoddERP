@@ -1,61 +1,120 @@
 <!DOCTYPE html>
 <html lang="zh">
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>注册</title>
-		<!-- Bootstrap CSS -->
-		<link rel="stylesheet" href="asset/plugin/bootstrap/css/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" href="asset/css/signin.css">
-		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-		<!--[if lt IE 9]>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>注册</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="asset/plugin/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="asset/css/signin.css">
+    <link rel="stylesheet" type="text/css" href="asset/css/common.css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
 			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
 			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 		<![endif]-->
-	</head>
-	<body>
-		<div class="container" ng-app='DoddERP' ng-controller='signinCtrl'>
+</head>
 
-		      <form class="form-signin" id="form1">
-		        <h2 class="form-signin-heading">注册</h2>
-		        <label for="inputUserName" class="sr-only">用户名</label>
-		        <input type="text" ng-model='user.userName' name='userName' id="inputUserName" class="form-control" placeholder="用户名" required autofocus>
-		        <label for="inputPassword" class="sr-only">Password</label>
-		        <input type="password" ng-model='user.userPassword' id="inputPassword" name="userPWD" class="form-control" placeholder="密码" required>
-<!-- 		        <div class="checkbox">
+<body>
+    <div class="container" ng-app='DoddERP' ng-controller='signinCtrl'>
+        <form class="form-signin" id="form1">
+            <h2 class="form-signin-heading">注册</h2>
+            <div class="alert alert-danger hidden">
+                <a href="#" class="close" ng-click='hidden()'>
+        					      &times;
+        					   </a>
+                <p>{{ user.msg }}</p>
+            </div>
+            <label for="inputUserName" class="sr-only">用户名</label>
+            <input type="text" ng-model='user.userName' name='userName' id="inputUserName" class="form-control" placeholder="用户名" required autofocus>
+            <label for="inputPassword" class="sr-only">Password</label>
+            <input type="password" ng-model='user.userPassword' id="inputPassword" name="userPWD" class="form-control" placeholder="密码" required>
+            <a href="login.html" title="" class='pull-right'>已有帐号?登录</a>
+            <!-- 		        <div class="checkbox">
 		          <label>
 		            <input type="checkbox" value="remember-me"> Remember me
 		          </label>
 		        </div> -->
-		        <button ng-click="addUser()" class="btn btn-lg btn-primary btn-block" type="button">注册</button>
-		      </form>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">注册</button>
+        </form>
+    </div>
+    <!-- /container -->
+    <!-- jQuery -->
+    <script src="asset/plugin/jquery.min.js"></script>
+    <!-- jQuery validation -->
+    <script src="asset/plugin/jquery-Validation/jquery.validate.min.js"></script>
+    <script src="asset/plugin/jquery-Validation/additional-methods.min.js"></script>
+    <!-- Bootstrap JavaScript -->
+    <script src="asset/plugin/bootstrap/js/bootstrap.min.js"></script>
+    <!-- Angularjs-->
+    <script src="asset/plugin/angular.min.js"></script>
+    <script type="text/javascript">
+    var app = angular.module('DoddERP', []);
+    app.controller('signinCtrl', function($scope, $http) {
+        $scope.user = {
+            userName: '',
+            userPassword: '',
+            msg: '',
+        };
+        $scope.hidden = function() {
+            $('.alert').addClass('hidden');
+        };
+        $scope.show = function() {
 
-		    </div> <!-- /container -->
-		<!-- jQuery -->
-		<script src="asset/plugin/jquery.min.js"></script>
-		<!-- Bootstrap JavaScript -->
-		<script src="asset/plugin/bootstrap/js/bootstrap.min.js"></script>
-		<!-- Angularjs-->
-		<script src="asset/plugin/angular.min.js"></script>
-		<script type="text/javascript">
-			var app = angular.module('DoddERP', []);
-			app.controller('signinCtrl', function($scope,$http) {
-				$scope.user={
-					userName:'',
-					userPassword:''
-				};
-			    $scope.addUser=function() {
-			    	$http.put('user',$scope.user)
-			    	.success(function(data) {
-			    		alert(JSON.stringify(data));
-			    	})
-			    	.error(function(data) {
-						alert(JSON.stringify(data));
-			    	});
-			    };
-			});
-		</script>
-	</body>
+            $('.alert').removeClass('hidden');
+        };
+        $scope.addUser = function() {
+            $http.put('user', $scope.user)
+                .success(function(data) {
+                    if (data.ok === 1) {
+                        window.location.href = 'login.html';
+                    } else {
+                        $scope.show();
+                        $scope.user.msg = data.msg;
+                    }
+                })
+                .error(function(data) {
+                    $scope.show();
+                    $scope.user.msg = data.msg;
+                });
+        };
+        $('#form1').validate({
+            rules: {
+                userName: {
+                    required: true,
+                    minlength:4
+                },
+                userPWD:{
+                	required: true,
+                    minlength:6
+                }
+            },
+            messages: {
+                userName: {
+                	minlength:"用户名必须大于4个字符",
+                    required: '用户名不能为空'
+                },
+                userPWD:{
+                	minlength:"密码必须大于6个字符",
+                    required: '密码不能为空'
+                }
+            },
+            errorClass:"has-error",
+            highlight: function(element, errorClass, validClass) {
+                $(element).addClass('has-error');
+            },
+            unhighlight: function(element, errorClass, validClass) {
+                $(element).removeClass('has-error');
+            },
+            submitHandler: function(form) {
+                $scope.addUser();
+            }
+        });
+    });
+    </script>
+</body>
+
 </html>

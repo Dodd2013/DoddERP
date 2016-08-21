@@ -29,7 +29,7 @@ CRUD.prototype = {
                 return callback(status.fail);
             }
             item.status = status.success.status;
-            item.message = status.success.message;
+            item.msg = status.success.msg;
             return callback(item);
         });
     },
@@ -46,7 +46,7 @@ CRUD.prototype = {
             }
             var obj = {
                 status: status.success.status,
-                message: status.success.message,
+                msg: status.success.msg,
                 items: items
             };
             return callback(obj);
