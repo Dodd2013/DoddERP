@@ -6,18 +6,18 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var errorHandler=require('./error');
-
+var config=require('./config');
 var app = express();
 
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser('DoddERP'));
+app.use(cookieParser(config.cookieName));
 app.use(session({
-     secret: 'MySecrets',
-     name: 'DoddERP',   //这里的name值得是cookie的name，默认cookie的name是：connect.sid
-     cookie: {maxAge: 1000*60*60*6 },  //设置maxAge是80000ms，即80s后session和相应的cookie失效过期
+     secret: config.sessionSecrets,
+     name: config.cookieName,   //这里的name值得是cookie的name，默认cookie的name是：connect.sid
+     cookie: {maxAge: config.cookieMaxAge },  //设置maxAge是80000ms，即80s后session和相应的cookie失效过期
      resave: false,
      saveUninitialized: true,
 }));
