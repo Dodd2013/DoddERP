@@ -1,79 +1,110 @@
 <!DOCTYPE html>
-<html lang="zh">
-
-<head>
+<html lang="zh-CN">
+  <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>主页</title>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="asset/plugin/bootstrap/css/bootstrap.min.css">
-    <link href="asset/css/dashboard.css" rel="stylesheet">
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-</head>
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
 
-<body ng-app='DoddERP' >
+    <title>DoddERP</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="asset/plugin/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="asset/css/dashboard.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="asset/js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body ng-app="DoddERP" ng-controller='homeCtrl'>
+
     <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">Project name</a>
-            </div>
-            <div id="navbar" class="navbar-collapse collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">Dashboard</a></li>
-                    <li><a href="#">Settings</a></li>
-                    <li><a href="#">Profile</a></li>
-                    <li><a href="#">Help</a></li>
-                </ul>
-                <form class="navbar-form navbar-right">
-                    <input type="text" class="form-control" placeholder="Search...">
-                </form>
-            </div>
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">DoddERP</a>
         </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+<!--             <li><a href="#">Dashboard</a></li>
+            <li><a href="#">Settings</a></li> -->
+            <li><a href="#" ng-bind='user.userName'></a></li>
+            <li><a href="javascript:;" ng-click='exit()'>退出</a></li>
+          </ul>
+        </div>
+      </div>
     </nav>
+
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-3 col-md-2 sidebar">
-                <ul class="nav nav-sidebar">
-                    <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
-                    <li><a href="#">Reports</a></li>
-                    <li><a href="#">Analytics</a></li>
-                    <li><a href="#">Export</a></li>
-                </ul>
-                <ul class="nav nav-sidebar">
-                    <li><a href="">Nav item</a></li>
-                    <li><a href="">Nav item again</a></li>
-                    <li><a href="">One more nav</a></li>
-                    <li><a href="">Another nav item</a></li>
-                    <li><a href="">More navigation</a></li>
-                </ul>
-                <ul class="nav nav-sidebar">
-                    <li><a href="">Nav item again</a></li>
-                    <li><a href="">One more nav</a></li>
-                    <li><a href="">Another nav item</a></li>
-                </ul>
-            </div>
-            <div ng-view class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            </div>
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          <ul class="nav nav-sidebar">
+            <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
+            <li><a href="#">Reports</a></li>
+            <li><a href="#">Analytics</a></li>
+            <li><a href="#">Export</a></li>
+          </ul>
+          <ul class="nav nav-sidebar">
+            <li><a href="">Nav item</a></li>
+            <li><a href="">Nav item again</a></li>
+            <li><a href="">One more nav</a></li>
+            <li><a href="">Another nav item</a></li>
+            <li><a href="">More navigation</a></li>
+          </ul>
+          <ul class="nav nav-sidebar">
+            <li><a href="">Nav item again</a></li>
+            <li><a href="">One more nav</a></li>
+            <li><a href="">Another nav item</a></li>
+          </ul>
         </div>
+        <div ng-view class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main"></div>
+      </div>
     </div>
+    <div class="modal fade" id='myModal'>
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">弹出框</h4>
+          </div>
+          <div class="modal-body">
+            <p>{{ msg }}</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
     <!-- jQuery -->
     <script src="asset/plugin/jquery.min.js"></script>
     <!-- Bootstrap JavaScript -->
     <script src="asset/plugin/bootstrap/js/bootstrap.min.js"></script>
+    <!-- jQuery validation -->
+    <script src="asset/plugin/jquery-Validation/jquery.validate.min.js"></script>
+    <script src="asset/plugin/jquery-Validation/additional-methods.min.js"></script>
     <!-- Angularjs-->
     <script src="asset/plugin/angular.min.js"></script>
-</body>
-
+    <script src="asset/js/home.js"></script>
+    <script src="../../assets/js/vendor/holder.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+  </body>
 </html>

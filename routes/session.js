@@ -7,6 +7,7 @@ router.get('/', function(req, res) {
         res.jsonp({ msg: 'unLogin' });
     } else {
         res.jsonp({
+            session:req.session,
         	userName:req.session.userName,
             msg: "ok"
         });
@@ -21,5 +22,8 @@ router.put('/',function(req, res) {
 });
 router.delete('/',function(req, res) {
 	req.session.userName = undefined;
+    res.jsonp({
+        msg:'ok'
+    });
 });
 module.exports = router;

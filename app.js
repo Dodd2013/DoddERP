@@ -17,7 +17,7 @@ app.use(cookieParser('DoddERP'));
 app.use(session({
      secret: 'MySecrets',
      name: 'DoddERP',   //这里的name值得是cookie的name，默认cookie的name是：connect.sid
-     cookie: {maxAge: 800000 },  //设置maxAge是80000ms，即80s后session和相应的cookie失效过期
+     cookie: {maxAge: 1000*60*60*6 },  //设置maxAge是80000ms，即80s后session和相应的cookie失效过期
      resave: false,
      saveUninitialized: true,
 }));
