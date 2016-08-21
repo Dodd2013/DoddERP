@@ -6,6 +6,7 @@
     "start": "supervisor ./bin/www"
   },
   "dependencies": {
+    "async": "^2.0.1",
     "body-parser": "~1.15.1",
     "cookie-parser": "~1.4.3",
     "crypto": "^0.0.3",
@@ -14,7 +15,7 @@
     "express": "~4.13.4",
     "express-session": "^1.14.0",
     "mongodb": "^2.2.7",
-    "mongoskin": "^2.1.0",
+    "mongoose": "^4.5.9",
     "morgan": "~1.7.0",
     "serve-favicon": "~2.3.0"
   }
