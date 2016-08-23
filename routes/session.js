@@ -7,7 +7,6 @@ router.get('/', function(req, res) {
         res.jsonp({ msg: 'unLogin' });
     } else {
         res.jsonp({
-            session:req.session,
         	userName:req.session.userName,
             msg: "ok"
         });
@@ -17,6 +16,7 @@ router.get('/', function(req, res) {
 router.put('/',function(req, res) {
 	user.checkUserLogin(req.body,function(msg) {
         req.session.userName=req.body.userName;
+        req.session.userRole=msg.userRole;
         res.jsonp(msg);
     });
 });

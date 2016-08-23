@@ -33,6 +33,8 @@ app.use(session({
 app.use('/', require('./routes/index'));
 app.use('/user', require('./routes/user'));
 app.use('/session',require('./routes/session'));
+app.use('/commodity',require('./routes/commodity'));
+
 app.use(express.static(path.join(__dirname, 'web')));
 
 errorHandler(app);

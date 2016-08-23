@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="zh-CN">
   <head>
@@ -9,17 +10,17 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>DoddERP</title>
+    <title>主页</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="asset/plugin/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="asset/css/dashboard.css" rel="stylesheet">
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-    <script src="asset/js/ie-emulation-modes-warning.js"></script>
+    <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -28,7 +29,7 @@
     <![endif]-->
   </head>
 
-  <body ng-app="DoddERP" ng-controller='homeCtrl'>
+  <body ng-app="DoddERP">
 
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
@@ -39,15 +40,18 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">DoddERP</a>
+          <a class="navbar-brand" href="#">Project name</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-<!--             <li><a href="#">Dashboard</a></li>
-            <li><a href="#">Settings</a></li> -->
-            <li><a href="#" ng-bind='user.userName'></a></li>
-            <li><a href="javascript:;" ng-click='exit()'>退出</a></li>
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="#">Settings</a></li>
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">Help</a></li>
           </ul>
+          <form class="navbar-form navbar-right">
+            <input type="text" class="form-control" placeholder="Search...">
+          </form>
         </div>
       </div>
     </nav>
@@ -74,37 +78,19 @@
             <li><a href="">Another nav item</a></li>
           </ul>
         </div>
-        <div ng-view class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main"></div>
+        <div ng-view class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          
+        </div>
       </div>
     </div>
-    <div class="modal fade" id='myModal'>
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title">弹出框</h4>
-          </div>
-          <div class="modal-body">
-            <p>{{ msg }}</p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
-          </div>
-        </div><!-- /.modal-content -->
-      </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
-    <!-- jQuery -->
-    <script src="asset/plugin/jquery.min.js"></script>
-    <!-- Bootstrap JavaScript -->
-    <script src="asset/plugin/bootstrap/js/bootstrap.min.js"></script>
-    <!-- jQuery validation -->
-    <script src="asset/plugin/jquery-Validation/jquery.validate.min.js"></script>
-    <script src="asset/plugin/jquery-Validation/additional-methods.min.js"></script>
-    <!-- Angularjs-->
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+    <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
     <script src="asset/plugin/angular.min.js"></script>
-    <script src="asset/js/home.js"></script>
-    <script src="../../assets/js/vendor/holder.min.js"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+    
   </body>
 </html>

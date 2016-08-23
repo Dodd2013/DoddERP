@@ -19,7 +19,7 @@ module.exports = (function() {
                 } else {
                     if (obj.length !== 0) {
                         if (crypto.md5(userData.userPassword) === obj[0].userPassword) {
-                            callback({ status: 1, msg: '用户登录成功' });
+                            callback({ status: 1, msg: '用户登录成功',userRole:obj[0].userRole});
                         } else {
                             callback({ status: 0, msg: '密码错误' });
                         }
