@@ -14,19 +14,24 @@ router.route('/').put(function(req, res) {
 	}
 	
 }).get(function(req, res) {
+	
 	if(req.session.userName===undefined){
 		res.jsonp({ok:0,msg:'用户没有登录'});
 	}else{
-		commodity.getCommodity(function(msg) {
+		// console.log(req.query);
+		commodity.getComodityPages(Number(req.query.offset), Number(req.query.limit), '',req.query.search, {}, function(err,msg) {
 			res.jsonp(msg);
-		})
+		});
+		// commodity.getCommodity(function(msg) {
+		// 	res.jsonp(msg);
+		// });
 	}
 });
 router.get('/on',function(req,res) {
 	if(req.session.userName===undefined){
 		res.jsonp({ok:0,msg:'用户没有登录'});
 	}else{
-		commodity.getCommodity(function(msg) {
+		commodity.getCommodityOn(function(msg) {
 			res.jsonp(msg);
 		})
 	}

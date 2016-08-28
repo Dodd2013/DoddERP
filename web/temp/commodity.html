@@ -1,19 +1,168 @@
-<div>
-
-  <!-- Nav tabs -->
-  <ul class="nav nav-tabs" role="tablist">
-    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
-    <li role="presentation"><a href="javascript:;" aria-controls="profile" role="tab" data-toggle="tab">Profile</a></li>
-    <li role="presentation"><a href="javascript:;" aria-controls="messages" role="tab" data-toggle="tab">Messages</a></li>
-    <li role="presentation"><a href="javascript:;" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
-  </ul>
-
-  <!-- Tab panes -->
-  <div class="tab-content">
-    <div role="tabpanel" class="tab-pane active" id="Home">...</div>
-    <div role="tabpanel" class="tab-pane" id="Profile">...</div>
-    <div role="tabpanel" class="tab-pane" id="Messages">...</div>
-    <div role="tabpanel" class="tab-pane" id="Settings">...</div>
-  </div>
-
+<div class="animated fadeIn">
+    <div id="comodityToolbar">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addComodity">添加</button>
+    </div>
+    <table id="commodityTable" data-toolbar="#comodityToolbar" data-unique-id="_id" data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-show-export="true" data-detail-view="true" data-detail-formatter="detailFormatter" data-minimum-count-columns="2" data-pagination="true" data-id-field="_id" data-show-footer="false" data-side-pagination="server" data-url="commodity">
+        <thead>
+            <tr>
+                <th data-field="_id" data-visible="false">商品ID</th>
+                <th data-field="commodityName">商品名称</th>
+                <th data-field="commodityWeight">克重</th>
+                <th data-field="commoditySpecification">商品规格</th>
+                <th data-field="commodityUnit">计量单位</th>
+                <th data-field="commodityRMDPrice">报价</th>
+                <th data-field="commodityDesc">商品说明</th>
+                <th data-field="commodityStatus" data-formatter="commodityStatusFormatter">商品状态</th>
+                <th data-formatter="opFormatter">操作</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="addComodity" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">添加商品</h4>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-danger alert-dismissible hidden" role="alert">
+                    <strong>错误,添加失败!</strong>
+                </div>
+                <form class="form-horizontal" id="addComodityFrom">
+                    <div class="form-group">
+                        <label for="commodityName" class="col-sm-2 control-label">商品名称</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="commodityName" name="commodityName" placeholder="商品名称">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="commodityWeight" class="col-sm-2 control-label">商品克重</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="commodityWeight" name="commodityWeight" placeholder="商品克重">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="commoditySpecification" class="col-sm-2 control-label">商品规格</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" id="commoditySpecification" name="commoditySpecification">
+                                <option value="正规">正规</option>
+                                <option value="大规">大规</option>
+                                <option value="特规">特规</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="commodityUnit" class="col-sm-2 control-label">计量单位</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" name="commodityUnit">
+                                <option value="张">张</option>
+                                <option value="吨">吨</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="commodityRMDPrice" class="col-sm-2 control-label">报价</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="commodityRMDPrice" name="commodityRMDPrice" placeholder="报价">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="commodityDesc" class="col-sm-2 control-label">商品说明</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="commodityDesc" name="commodityDesc" placeholder="商品说明">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="commodityStatus" class="col-sm-2 control-label">商品状态</label>
+                        <div class="col-sm-10">
+                            <select name="commodityStatus" class="form-control">
+                                <option value="1">在售</option>
+                                <option value="0">停售</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" ng-click="addComodityBtn()">添加</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 修改弹出框 -->
+<div class="modal fade" id="editComodity" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">修改商品</h4>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-danger alert-dismissible hidden" role="alert">
+                    <strong>错误,添加失败!</strong>
+                </div>
+                <form class="form-horizontal" id="editComodityFrom">
+                    <div class="form-group">
+                        <label for="commodityName" class="col-sm-2 control-label">商品名称</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" ng-model="formData.commodityName" id="commodityName" name="commodityName" placeholder="商品名称">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="commodityWeight" class="col-sm-2 control-label">商品克重</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" ng-model="formData.commodityWeight" id="commodityWeight" name="commodityWeight" placeholder="商品克重">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="commoditySpecification" class="col-sm-2 control-label">商品规格</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" id="commoditySpecification" name="commoditySpecification" ng-model="formData.commoditySpecification">
+                                <option value="正规">正规</option>
+                                <option value="大规">大规</option>
+                                <option value="特规">特规</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="commodityUnit" class="col-sm-2 control-label">计量单位</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" name="commodityUnit" ng-model="formData.commodityUnit">
+                                <option value="张">张</option>
+                                <option value="吨">吨</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="commodityRMDPrice" class="col-sm-2 control-label">报价</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="commodityRMDPrice" name="commodityRMDPrice" placeholder="报价" ng-model="formData.commodityRMDPrice">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="commodityDesc" class="col-sm-2 control-label">商品说明</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" ng-model="formData.commodityDesc" id="commodityDesc" name="commodityDesc" placeholder="商品说明">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="commodityStatus" class="col-sm-2 control-label">商品状态</label>
+                        <div class="col-sm-10">
+                            <select name="commodityStatus" class="form-control" ng-model="formData.commodityStatus">
+                                <option value="1">在售</option>
+                                <option value="0">停售</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" ng-click="editComodityBtn()">修改</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
 </div>
