@@ -1,11 +1,23 @@
+<script type="text/javascript">
+var commodityStatusFormatter = function(value, row, index) {
+    if (value === 1) {
+        return "在售";
+    } else {
+        return "停售";
+    }
+};
+var opFormatter = function(v, r, i) {
+    return "<button type='button' class='btn btn-warning btn-xs commodity-edit-btn' data-row-id='" + r._id + "' >修改</button> <button type='button' class='btn btn-danger btn-xs commodity-remove-btn' data-row-id='" + r._id + "' >删除</button>";
+};
+</script>
 <div class="animated fadeIn">
     <div id="comodityToolbar">
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addComodity">添加</button>
     </div>
-    <table id="commodityTable" data-toolbar="#comodityToolbar" data-unique-id="_id" data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-show-export="true" data-detail-view="true" data-detail-formatter="detailFormatter" data-minimum-count-columns="2" data-pagination="true" data-id-field="_id" data-show-footer="false" data-side-pagination="server" data-url="commodity">
+    <table id="commodityTable" data-toolbar="#comodityToolbar" data-unique-id="_id" data-show-refresh="true" data-show-columns="true" data-show-export="true" data-pagination="true" data-id-field="_id" data-show-footer="false" data-side-pagination="server" data-url="commodity">
         <thead>
             <tr>
-                <th data-field="_id" data-visible="false">商品ID</th>
+                <th data-visible="false" data-field="_id">商品ID</th>
                 <th data-field="commodityName">商品名称</th>
                 <th data-field="commodityWeight">克重</th>
                 <th data-field="commoditySpecification">商品规格</th>
@@ -26,11 +38,11 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="myModalLabel">添加商品</h4>
             </div>
-            <div class="modal-body">
-                <div class="alert alert-danger alert-dismissible hidden" role="alert">
-                    <strong>错误,添加失败!</strong>
-                </div>
-                <form class="form-horizontal" id="addComodityFrom">
+            <form class="form-horizontal" id="addComodityFrom" method="get" action="#">
+                <div class="modal-body">
+                    <div class="alert alert-danger alert-dismissible hidden" role="alert">
+                        <strong>错误,添加失败!</strong>
+                    </div>
                     <div class="form-group">
                         <label for="commodityName" class="col-sm-2 control-label">商品名称</label>
                         <div class="col-sm-10">
@@ -83,12 +95,12 @@
                             </select>
                         </div>
                     </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" ng-click="addComodityBtn()">添加</button>
-                <button type="button" class="btn btn-danger" data-dismiss="modal">取消</button>
-            </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">添加</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">取消</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -100,11 +112,11 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="myModalLabel">修改商品</h4>
             </div>
-            <div class="modal-body">
-                <div class="alert alert-danger alert-dismissible hidden" role="alert">
-                    <strong>错误,添加失败!</strong>
-                </div>
-                <form class="form-horizontal" id="editComodityFrom">
+            <form class="form-horizontal" id="editComodityFrom">
+                <div class="modal-body">
+                    <div class="alert alert-danger alert-dismissible hidden" role="alert">
+                        <strong>错误,添加失败!</strong>
+                    </div>
                     <div class="form-group">
                         <label for="commodityName" class="col-sm-2 control-label">商品名称</label>
                         <div class="col-sm-10">
@@ -157,12 +169,14 @@
                             </select>
                         </div>
                     </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" ng-click="editComodityBtn()">修改</button>
-                <button type="button" class="btn btn-danger" data-dismiss="modal">取消</button>
-            </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">修改</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">取消</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
+<script type="text/javascript">
+</script>

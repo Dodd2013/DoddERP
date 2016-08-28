@@ -36,5 +36,25 @@ router.get('/on',function(req,res) {
 		})
 	}
 });
+router.delete('/:id',function(req,res) {
+	if(req.session.userName===undefined){
+		res.jsonp({ok:0,msg:'用户没有登录'});
+	}else{
+		console.log(req.params.id);
+		commodity.deleteCommodity(req.params.id,function(msg) {
+			res.jsonp(msg);
+		})
+	}
+});
+router.post('/:id',function(req,res) {
+	if(req.session.userName===undefined){
+		res.jsonp({ok:0,msg:'用户没有登录'});
+	}else{
+		console.log(req.params.id);
+		commodity.updateCommodity(req.params.id,req.body,function(msg) {
+			res.jsonp(msg);
+		})
+	}
+});
 
 module.exports = router;

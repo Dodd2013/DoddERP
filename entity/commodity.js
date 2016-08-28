@@ -8,7 +8,7 @@ module.exports = (function() {
             commoditySpecification: { type: String, required: true }, //商品规格
             commodityUnit: { type: String, required: true }, //计量单位
             commodityRMDPrice: { type: Number, required: true }, //报价
-            commodityDesc: { type: String, required: true }, //商品说明
+            commodityDesc: { type: String}, //商品说明
             commodityStatus: { type: Number, required: true } //商品状态
         }),
         commodityModel = db.model('commodity', commoditySchema);
@@ -35,8 +35,26 @@ module.exports = (function() {
         getComodityPages: function(page, pageSize, populate, queryParams, sortParams, cb) {
             pages.pageQuerySearch(page, pageSize, commodityModel, populate, queryParams, sortParams, cb);
         },
-        getCommodityOn: function() {
+        getCommodityOn: function(cb) {
             commodityModel.find({ commodityStatus: true }, function(err, obj) {
+                if (err) {
+                    cb({ ok: 0, msg: '服务器繁忙，请稍后再试' });
+                } else {
+                    cb(obj);
+                }
+            });
+        },
+        updateCommodity:function(id,updata,cb) {
+            commodityModel.update({_id:id},{$set:updata},function(err,obj) {
+                if (err) {
+                    cb({ ok: 0, msg: '服务器繁忙，请稍后再试' });
+                } else {
+                    cb(obj);
+                }
+            });
+        },
+        deleteCommodity:function(id,cb){
+            commodityModel.remove({_id:id},function(err,obj) {
                 if (err) {
                     cb({ ok: 0, msg: '服务器繁忙，请稍后再试' });
                 } else {

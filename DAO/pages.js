@@ -13,7 +13,6 @@ var pageQuerySearch = function(page, pageSize, Model, populate, queryParams, sor
     var reg =new RegExp(".*"+(queryParams||'')+".*");
     queryObject=[];
     for (key in Model.schema.paths) {
-        // console.log(key);
         if(key!=='_id'&&key!=='__v'&&Model.schema.paths[key].instance==='String'){
             cond={};
             cond[key]={$regex:reg};
@@ -21,8 +20,6 @@ var pageQuerySearch = function(page, pageSize, Model, populate, queryParams, sor
         }
     }
     queryParams={$or:queryObject};
-    // queryParams.$or=queryObject;
-    console.log(queryObject);
     async.parallel({
         count: function(done) { // 查询数量
             Model.count(queryParams).exec(function(err, count) {
